@@ -1,0 +1,7 @@
+npm init -- enter in all options, create a package.json
+npm install webpack-dev-server --save-dev
+npm i -D webpack
+npm i -D webpack-cli
+
+
+node_modules/.bin/webpack-dev-server --subir servidor, ubicado en el repo

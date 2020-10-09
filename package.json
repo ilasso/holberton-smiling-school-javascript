@@ -1,0 +1,24 @@
+{
+  "name": "holberton-smiling-school-javascript",
+  "version": "1.0.0",
+  "description": "In this project, we will implement 3 web pages with Bootstrap. We will use all HTML/CSS/Accessibility/Responsive design/Bootstrap knowledges that we learned previously.",
+  "main": "codeJS.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilasso/holberton-smiling-school-javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilasso/holberton-smiling-school-javascript/issues"
+  },
+  "homepage": "https://github.com/ilasso/holberton-smiling-school-javascript#readme",
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
