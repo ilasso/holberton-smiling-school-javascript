@@ -28,13 +28,13 @@ function BuiltQuote(numitem, item) {
     `)
 } // BuiltQuote
 
-function BuiltpopularVideos(numitem, item) {
+function BuiltpopularVideos(numitem, item, idelement) {
   let active = ""
   if (!numitem) {
     active = "active"
   }
   console.log(Object.keys(item))
-  $("#popvideos").append(
+  $(idelement).append(
           `<div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ${active}">
               <div class="card">
                   <div class="card-body">
@@ -77,6 +77,23 @@ function BuiltpopularVideos(numitem, item) {
 
 }
 
+function GetLatestVideos() {
+  $.ajax({
+    dataType:"json",
+    beforeSend: displayLoading(true,"#latestvideos"),
+    contentType: "application/json",
+    url:`https://smileschool-api.hbtn.info/latest-videos`,
+    success:function(result){
+      $("#latestvideos").empty()
+      displayLoading(false,"#latestvideos")
+      result.forEach((item, i) => {
+        console.log(item)
+        BuiltpopularVideos(i, item, "#latestvideos")
+      }); //forEach(
+      }//success
+    }); //ajax*/
+}
+
 function GetPopVideos() {
   $.ajax({
     dataType:"json",
@@ -88,7 +105,7 @@ function GetPopVideos() {
       displayLoading(false,"#popvideos")
       result.forEach((item, i) => {
         console.log(item)
-        BuiltpopularVideos(i, item)
+        BuiltpopularVideos(i, item, "#popvideos")
       }); //forEach(
       }//success
     }); //ajax*/
@@ -113,4 +130,5 @@ function GetQuotes(){
 $(document).ready(function(){
     GetQuotes();
     GetPopVideos();
+    GetLatestVideos();
 });
