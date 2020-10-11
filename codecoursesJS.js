@@ -43,7 +43,7 @@ function BuiltContVideos(numitem, item) {
   console.log(item)
   console.log("-----Star-----")
   console.log(item.star)
-
+  //$("#cont_videos").prepend(`<label for="cont_videos" class="text-secondary mb-5">${item.length} Videos</label>`)
   $("#cont_videos").append(`
     <div class="col-md-3 col-sm-4 col-12 mb-5">
         <div class="card">
@@ -94,17 +94,18 @@ function GetCourseByCriteria(search, topic, sortBy) {
   console.log("topic=" + topic)
   console.log("sortBy=" + sortBy)
   $("#cont_videos").empty()
-  $.ajax({
+    $.ajax({
     dataType:"json",
     contentType: "application/json",
     beforeSend: displayLoading(true,"#idcourses"),
     url:`https://smileschool-api.hbtn.info/courses?q=${search}&topic=${topic}&sortBy=${sortBy}`,
     success:function(result){
-      $("#cont_videos").empty()
+      //$("#cont_videos").empty()
       displayLoading(false,"#idcourses")
       console.log("resultado del search")
       console.log(result.courses)
-        for (var i = 0; i < result.courses.length; i++) {
+
+      for (var i = 0; i < result.courses.length; i++) {
           console.log("-------en foreach-------------")
           console.log(result.courses[i])
           BuiltContVideos(i, result.courses[i])
@@ -114,6 +115,8 @@ function GetCourseByCriteria(search, topic, sortBy) {
 } // GetCourseByCriteria
 
 function ListenUserCriteria() {
+    //search, topic, sortBy
+    GetCourseByCriteria("", "all", "most_popular") //all records
     var selecttopics = document.getElementById('topics');
     selecttopics.addEventListener('change',
             function(){
