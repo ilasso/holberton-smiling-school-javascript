@@ -1,5 +1,5 @@
 function displayLoading(loading, idelement) {
-  if (loading) {
+    if (loading) {
       $(idelement).wrap("<div class='loader'></div>")
   }
   else {
@@ -94,7 +94,7 @@ function BuiltContVideos(numitem, item, i ,length) {
 }
 function BuitQvideos(Q) {
   $("#Qvideos").remove()
-  $("#idcourses").before(`<div><label id="Qvideos" for="cont_videos" class="text-secondary mb-5">${Q} Videos</label><div>`)
+  $("#idcourses").before(`<label id="Qvideos" class="text-secondary mb-5">${Q} Videos</label>`)
 }
 
 function GetCourseByCriteria(search, topic, sortBy) {
@@ -102,7 +102,7 @@ function GetCourseByCriteria(search, topic, sortBy) {
   console.log("search=" + search)
   console.log("topic=" + topic)
   console.log("sortBy=" + sortBy)
-  $("#cont_videos").empty()
+    $("#cont_videos").empty()
     $.ajax({
     dataType:"json",
     contentType: "application/json",
@@ -128,14 +128,18 @@ function GetCourseByCriteria(search, topic, sortBy) {
     console.log(Qvideos)
     if (!Qvideos) {
       BuitQvideos(0)
-
     }
 
 } // GetCourseByCriteria
 
 function ListenUserCriteria() {
+
     //search, topic, sortBy
     GetCourseByCriteria("", "all", "most_popular") //all records
+
+    let txt = document.getElementById("Qvideos");
+    txt.innerHTML = "";
+
     var selecttopics = document.getElementById('topics');
     selecttopics.addEventListener('change',
             function(){
@@ -144,6 +148,8 @@ function ListenUserCriteria() {
                   console.log("cambio  valor topics")
                   //search, topic, sortBy
                   GetCourseByCriteria(selectkeyword.value, selectedOption.value, selectsortby.value)
+                  let txt = document.getElementById("Qvideos");
+                  txt.innerHTML = "";
                   }
                 );
     var selectsortby = document.getElementById('sortby');
@@ -155,6 +161,8 @@ function ListenUserCriteria() {
                   console.log(selecttopics.value)
                   //search, topic, sortBy
                   GetCourseByCriteria(selectkeyword.value, selecttopics.value, selectedOption.value)
+                  let txt = document.getElementById("Qvideos");
+                  txt.innerHTML = "";
                   }
                 );
 
@@ -167,6 +175,8 @@ function ListenUserCriteria() {
                   console.log("cambio  valor keyword")
                   //search, topic, sortBy
                   GetCourseByCriteria(selectedOption, selecttopics.value, selectsortby.value)
+                  let txt = document.getElementById("Qvideos");
+                  txt.innerHTML = "";
                   }
                 );
 
@@ -174,8 +184,6 @@ function ListenUserCriteria() {
 }
 
 $(document).ready(function(){
-
     GetCriteriaSearch();
     ListenUserCriteria()
-    //https://smileschool-api.hbtn.info/courses?q=${search}&topic=${topic}&sortBy=${sortBy}`,
 });

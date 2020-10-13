@@ -13,7 +13,9 @@
     100% { transform: rotate(360deg); }
 }
 
-
+.Qvideos {
+  padding: 0 0 0 0;
+}
 
 
 .bg {
