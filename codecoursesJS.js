@@ -38,11 +38,15 @@ function GetCriteriaSearch() {
     }); //ajax*/
 }
 
-function BuiltContVideos(numitem, item) {
+function BuiltContVideos(numitem, item, i ,length) {
   console.log("---BuiltContVideos----")
   console.log(item)
   console.log("-----Star-----")
   console.log(item.star)
+
+  if (i === 0) {
+    BuitQvideos(length)
+  }
   //$("#cont_videos").prepend(`<label for="cont_videos" class="text-secondary mb-5">${item.length} Videos</label>`)
   $("#cont_videos").append(`
     <div class="col-md-3 col-sm-4 col-12 mb-5">
@@ -88,8 +92,13 @@ function BuiltContVideos(numitem, item) {
     </div>
     `)
 }
+function BuitQvideos(Q) {
+  $("#Qvideos").remove()
+  $("#idcourses").before(`<div><label id="Qvideos" for="cont_videos" class="text-secondary mb-5">${Q} Videos</label><div>`)
+}
 
 function GetCourseByCriteria(search, topic, sortBy) {
+  let Qvideos = 0
   console.log("search=" + search)
   console.log("topic=" + topic)
   console.log("sortBy=" + sortBy)
@@ -104,14 +113,24 @@ function GetCourseByCriteria(search, topic, sortBy) {
       displayLoading(false,"#idcourses")
       console.log("resultado del search")
       console.log(result.courses)
-
+      Qvideos = result.courses.length
+      console.log("-----Qvideos---")
+      console.log(Qvideos)
       for (var i = 0; i < result.courses.length; i++) {
           console.log("-------en foreach-------------")
           console.log(result.courses[i])
-          BuiltContVideos(i, result.courses[i])
+
+          BuiltContVideos(i, result.courses[i], i, result.courses.length)
         }//for
       }//success
     }); //ajax
+    console.log("-----Qvideo222s---")
+    console.log(Qvideos)
+    if (!Qvideos) {
+      BuitQvideos(0)
+
+    }
+
 } // GetCourseByCriteria
 
 function ListenUserCriteria() {
@@ -155,6 +174,7 @@ function ListenUserCriteria() {
 }
 
 $(document).ready(function(){
+
     GetCriteriaSearch();
     ListenUserCriteria()
     //https://smileschool-api.hbtn.info/courses?q=${search}&topic=${topic}&sortBy=${sortBy}`,
